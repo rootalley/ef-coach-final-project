@@ -1,2 +1,2 @@
 # ef-coach-final-project
-An executive skills coach for college students
+An executive function skills coach for college students.
