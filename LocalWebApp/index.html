@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Function Skills (EFS) Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">x
+    <nav>
+      <ul>
+        <li><a href="#dashboard" onclick="showSection('dashboard')">Dashboard</a></li>
+        <li><a href="#assessment" onclick="showSection('assessment')">Assessment</a></li>
+        <li><a href="#planning" onclick="showSection('planning')">Plan Management</a></li>
+        <li><a href="#organization" onclick="showSection('organization')">Organization</a></li>
+        <li><a href="#time-management" onclick="showSection('time-management')">Time Management</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <h1>Executive Function Skills Coach</h1>
+
+      <!-- Dashboard Section -->
+      <section id="dashboard">
+        <h2>Dashboard</h2>
+
+        <!-- Descriptions for each Skill Area -->
+        <div class="dropdown">
+          <button id="skillsDropdownButton" class="dropdown-button">
+            5 Skill Areas <span class="arrow">&#9662;</span>
+          </button>
+          <div id="skillsDescription" class="dropdown-content">
+            <h5>Plan Management</h5>
+            <p>This skill area refers to the ability to create and manage plans for accomplishing tasks. It includes individual executive skills such as planning/prioritizing, sustained attention, flexibility, metacognition, and goal-directed persistence.</p>
+
+            <h5>Time Management</h5>
+            <p>This skill area refers to the ability to manage various aspects of time, including time estimating, time allocation, and being able to work within time limits and time constraints. It includes the individual executive skills of time management, task initiation, and working memory.</p>
+
+            <h5>Organization</h5>
+            <p>This skill area refers to the ability to create and maintain systems to keep track of information or materials. It incorporates the executive skills of organization and working memory.</p>
+
+            <h5>Emotion Regulation</h5>
+            <p>This skill area is identical to the executive skill of emotional control. It refers to the ability to manage emotions in order to achieve goals, complete tasks, or control and direct behavior.</p>
+
+            <h5>Behavior Regulation</h5>
+            <p>This skill area refers to the ability to exhibit self-control and to think before acting or responding to consider the consequences of one's actions. It includes the executive skills of response inhibition and goal-directed persistence.</p>
+          </div>
+        </div>
+
+        <!-- Feedback Table -->
+        <h3>Latest Feedback</h3>
+        <table id="scoreTable" border="1">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Score</th>
+              <th>Feedback</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <!-- Latest Assessment Results -->
+        <h4>Latest Assessment Results</h4>
+        <canvas id="resultsChart"></canvas>
+
+        <!-- Skills Built Over Time -->
+        <h5>Skills Built over Time</h5>
+        <canvas id="progressChart"></canvas>
+      </section>
+
+      <!-- Assessment Section -->
+      <section id="assessment" style="display: none;">
+        <h2>Assessment</h2>
+
+        <div id="assessmentDescription" style="display: block;">
+          <!-- Your description content here -->
+          <p>The ESQ-R is a self-report survey that assesses how you view your executive skills. The 25 items on this survey yield scores in 5 domains of executive skills called Skill Areas.</p>
+          <p>Scores reported below are your average scores for each Skill Area. Scores range from 0 to 3. The lower the score, the stronger your skills are in this domain. When scores fall at 2 or above, the skill area might be problematic for you.</p>
+          <p>Based on your scores, the feedback table will recommend tips, games, or other resources to build your skills. When working to improve some of your areas of challenge, you can take the ESQ-R again. Self-assessments should not be done more than every 10-12 weeks to give yourself time to progress.</p>
+          <p>When ready to access your skills, click on the button below to open the Self-assessment.</p>
+        </div>
+
+        <!-- Button to Open Assessment Form -->
+        <div class="assessment-button">
+          <button id="openAssessment">Assess my skills</button>
+        </div>
+      </section>
+
+      <!-- Planning Section -->
+      <section id="planning" style="display: none;">
+        <h2>Plan Management</h2>
+
+        <!-- Task Table -->
+        <h3>Your Tasks</h3>
+        <table id="taskTable">
+          <thead>
+            <tr>
+              <th onclick="sortTable(0)">Task</th>
+              <th onclick="sortTable(1)">Due Date</th>
+              <th onclick="sortTable(2)">% Weight (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr draggable="true" id="task1">
+              <td>Task 1</td>
+              <td>2024-11-20</td>
+              <td>30</td>
+            </tr>
+            <tr draggable="true" id="task2">
+              <td>Task 2</td>
+              <td>2024-11-25</td>
+              <td>50</td>
+            </tr>
+            <tr draggable="true" id="task3">
+              <td>Task 3</td>
+              <td>2024-11-18</td>
+              <td>20</td>
+            </tr>
+            <!-- Add more tasks as needed -->
+          </tbody>
+        </table>
+
+        <!-- Eisenhower Matrix -->
+        <h3>Priority Matrix</h3>
+        <div id="eisenhowerMatrix">
+          <div id="quadrant1" class="quadrant" role="list" aria-label="Urgent & Important" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h4>Urgent & Important</h4>
+          </div>
+          <div id="quadrant2" class="quadrant" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h4>Not Urgent & Important</h4>
+          </div>
+          <div id="quadrant3" class="quadrant" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h4>Urgent & Not Important</h4>
+          </div>
+          <div id="quadrant4" class="quadrant" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h4>Not Urgent & Not Important</h4>
+          </div>
+        </div>
+      </section>
+
+      <!-- ORGANIZATION -->
+      <section id="organization" style="display: none;">
+        <h1>Schedule Manager</h1>
+        <h2>Video below demonstrates the organization intervention to be implemented</h2>
+        <video controls width="640" height="360">
+            <source src="schedule-tool_video.mov" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+      </section>
+
+      <!-- Time management -->
+      <section id="time-management" style="display: none;">
+        <h2>Time Management</h2>
+        <div id="pomodoro-app">
+          <div id="tabs">
+            <button class="tab active" data-mode="pomodoro">Work Period</button>
+            <button class="tab" data-mode="shortBreak">Short Break</button>
+            <button class="tab" data-mode="longBreak">Long Break</button>
+          </div>
+          <div id="timer-display">
+            <span id="timer-minutes">25</span>:<span id="timer-seconds">00</span>
+          </div>
+          <div id="control-buttons">
+            <button id="start-button" class="start">START</button>
+            <button id="pause-button" class="pause" style="display: none;">PAUSE</button>
+            <button id="skip-button" class="skip" style="display: none;">SKIP</button>
+          </div>
+          <div id="task-section">
+            <h3>Tasks</h3>
+            <ul id="task-list"></ul>
+            <button id="add-task-button">+ Add Task</button>
+          </div>
+          <div id="task-controls" style="display: none;">
+            <h4 id="current-task"></h4>
+            <button id="complete-task-button" style="display: none;">Complete Task</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+
+
+</body>
+</html>
